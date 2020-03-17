@@ -1,0 +1,2 @@
+reverse 11223344
+split sdfbdsefff

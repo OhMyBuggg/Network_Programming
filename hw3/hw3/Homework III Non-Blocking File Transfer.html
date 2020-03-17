@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Homework III Non-Blocking File Transfer - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @charset "UTF-8";@import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;padding:0 15px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child > ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-published-note{color:#337ab7}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Homework-III-Non-Blocking-File-Transfer"><a class="anchor hidden-xs" href="#Homework-III-Non-Blocking-File-Transfer" title="Homework-III-Non-Blocking-File-Transfer"><span class="octicon octicon-link"></span></a>Homework III Non-Blocking File Transfer</h1><p>In this homework, you have to practice Nonblocking I/O in a network program.</p><h2 id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><span class="octicon octicon-link"></span></a>Introduction</h2><p>You should write a server and a client. The server has to be a single-process, single-thread, and non-blocking server, and all connections are TCP in this homework.</p><p>One user can login the server on different hosts at the same time. Each client belongs to the same user should have the same view of files on the server.</p><p>The scenario of this homework is similar to Dropbox:</p><ul>
+<li>A user can upload and save his files on the server.</li>
+<li>The clients of the user are running on different hosts.</li>
+<li>When any of client of the user uploads a file, the server has to transmit it to all other clients.</li>
+<li>When a new client connects to the server, the server should transmit all the files, which have been uploaded by the other clients, to the new client immediately.</li>
+<li>We will type <code>put &lt;filename&gt;</code> on different clients at the same time, and your programs have to deal with this case.</li>
+<li>If one of the clients is sleeping, the server should send the file data to other clients in a non-blocking way.</li>
+<li>The uploading data only need to be sent to the clients that belong to the same user.</li>
+</ul><div class="alert alert-info">
+<p><strong>Note</strong>: In your server program, you can include the following two lines to achieve the non-blocking function.</p>
+<pre><code class="cpp hljs"><span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token function">fcntl</span><span class="token punctuation">(</span>sock<span class="token punctuation">,</span> F_GETFL<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fcnctl</span><span class="token punctuation">(</span>sock<span class="token punctuation">,</span> F_SETTFL<span class="token punctuation">,</span> flag<span class="token operator">|</span>O_NONBLOCK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</div><p>Please confirm that your server operates in the non-blocking mode. We will purposely let the socket send buffer full to test the correctness of your server.</p><h2 id="Inputs"><a class="anchor hidden-xs" href="#Inputs" title="Inputs"><span class="octicon octicon-link"></span></a>Inputs</h2><ol>
+<li>
+<p><code>./server &lt;port&gt;</code><br>
+Please make sure that you execute the server program in this format.</p>
+</li>
+<li>
+<p><code>./client &lt;ip&gt; &lt;port&gt; &lt;username&gt;</code><br>
+Please make sure that you execute the client program in this format.</p>
+</li>
+<li>
+<p><code>put &lt;filename&gt;</code><br>
+This command, which is executed on the client side by the user, is to upload your files to the server side.<br>
+Users can transmit any files they want. But these files, after being received by the server, need to be stored in the same directory created for the user on the server side.<br>
+Each file should be sent to the other clients belonging to the same user.<br>
+The file to be uploaded should reside in the same directory with the client program.</p>
+</li>
+<li>
+<p><code>sleep &lt;seconds&gt;</code><br>
+This command is to let the client sleep for the specified period of time.</p>
+</li>
+<li>
+<p><code>exit</code><br>
+This command is to disconnect with the server and terminate the program.</p>
+</li>
+</ol><h2 id="Outputs"><a class="anchor hidden-xs" href="#Outputs" title="Outputs"><span class="octicon octicon-link"></span></a>Outputs</h2><ol>
+<li>Welcome message. (displayed at the client side)</li>
+</ol><pre><code>Welcome to the dropbox-like server: &lt;username&gt;
+</code></pre><ol start="2">
+<li>Uploading progess bar. (displayed at the sending client side)</li>
+</ol><pre><code>[Upload] &lt;filename&gt; Start!
+Progress : [######################]
+[Upload] &lt;filename&gt; Finish!
+</code></pre><ol start="3">
+<li>Downing progess bar. (displayed at the receiving client side)</li>
+</ol><pre><code>[Download] &lt;filename&gt; Start!
+Progress : [######################]
+[Download] &lt;filename&gt; Finish!
+</code></pre><ol start="4">
+<li>Sleeping count down. (displayed at the client side)</li>
+</ol><pre><code>sleep 20
+The client starts to sleep.
+Sleep 1
+.
+.
+Sleep 19
+Sleep 20
+Client wakes up.   
+</code></pre><div class="alert alert-info">
+<p><strong>Note</strong>: Your progress bar should have the following format.<br>
+They are represented by the # signs and the whitespaces.<br>
+The # signs mean how much data your client has uploaded/downloaded.<br>
+The whitespaces mean how much data your client hasn’t uploaded/downloaded.<br>
+The sum of the # signs and whitespaces is twenty.</p>
+<pre><code class="cpp hljs">Progress <span class="token punctuation">[</span>###                 <span class="token punctuation">]</span> <span class="token comment">// three # signs mean that your download/upload progress has completed 15%.</span>
+Progress <span class="token punctuation">[</span>####################<span class="token punctuation">]</span> <span class="token comment">// twenty # signs mean that your download/upload progress finishes.</span>
+</code></pre>
+<p>Client should execute either one upload process or one download process in the same time.</p>
+<p><strong>Tip</strong>:<br>
+You can use ‘/r’ to reset cursor to the beginning of the same line.</p>
+</div><h2 id="Test-Cases"><a class="anchor hidden-xs" href="#Test-Cases" title="Test-Cases"><span class="octicon octicon-link"></span></a>Test Cases</h2><h3 id="Steps"><a class="anchor hidden-xs" href="#Steps" title="Steps"><span class="octicon octicon-link"></span></a>Steps</h3><ol>
+<li>
+<p>First, make sure that two clients of userA have connected to the server.<br>
+After one client uploads a test file to the server, the other should receive that test file from the server.</p>
+</li>
+<li>
+<p>When a new client of userA connects to the server (now there are totally three clients of userA on ther server), the server has to transmit the test file uploaded in step 1 to this new client.</p>
+</li>
+<li>
+<p>Two clients of userA upload a test file with different names respectively at the same time.<br>
+At the end of file transmission, all clients of userA must have the same set of files. That is, the two sending clients should receive the file uploaded by each other, and the other client should receive both files.</p>
+</li>
+<li>
+<p>After a new client of userA connects to the server (now there are totally four clients of userA on ther server), we will execute <code>sleep 20</code> on this client to force it to sleep for 20 seconds. Within this 20 seconds, we will let another client transmit a file to the server. After receiving the file, the server will transmit it to all the other clients of the user, including the <strong>“sleeping”</strong> one. Your server should continually send the file data to clients even when one of the client is sleeping.</p>
+</li>
+<li>
+<p>When a new client of userB connects to the server, suppose a client of userA upload a test file, the server should not send the test file to the client of userB.</p>
+</li>
+<li>
+<p>Exit all clients.</p>
+</li>
+</ol><div class="alert alert-info">
+<p><strong>Note</strong>:<br>
+We will use <strong>“diff”</strong> to compare the files sent and the file received to check whether they are the same to ensure that the file transfers are complete.<br>
+You <strong>cannot</strong> use <strong>“fork”</strong> system call or <strong>“thread”</strong> function call in this homework. Your server must be a single-process, single-thread, and non-blocking server.</p>
+</div><div class="alert alert-info">
+<p><strong>Note</strong>:</p>
+<p>When a client receives a file from the server, it has to store the file in the current directory of the client.</p>
+<pre><code>current directory of client
+├── client
+├── testfile1
+├── testfile2
+└── ……
+</code></pre>
+<p>When a user first uploads a file to the server, the server will create a directory for the user which is named after the user’s name in the current directory of the server.</p>
+<p>Then, your server should store the files which belong to the user in his directory.</p>
+<pre><code>current directory of server
+├── server
+└── tom
+     ├── testfile1
+     └── ……
+</code></pre>
+</div><h3 id="Output"><a class="anchor hidden-xs" href="#Output" title="Output"><span class="octicon octicon-link"></span></a>Output</h3><p>The following cases will be executed one by one.</p><h4 id="Execute-Server"><a class="anchor hidden-xs" href="#Execute-Server" title="Execute-Server"><span class="octicon octicon-link"></span></a><strong>[Execute Server]</strong></h4><pre><code class="shell hljs">[user@inp1 ~/hw3 ] ./server 8888
+</code></pre><h4 id="Case-1-Upload-a-file-20"><a class="anchor hidden-xs" href="#Case-1-Upload-a-file-20" title="Case-1-Upload-a-file-20"><span class="octicon octicon-link"></span></a><strong>[Case 1: Upload a file] 20%</strong></h4><pre><code class="shell hljs">[user@inp1 ~/hw3 ] cp testfile 0/testfile 
+<span class="hljs-meta">
+#</span><span class="bash"> In Terminal 0</span>
+[user@inp1 ~/hw3/0 ] ./client 127.0.0.1 8888 tom
+Welcome to the dropbox-like server: tom
+<span class="hljs-meta">
+#</span><span class="bash"> In Terminal 1</span>
+[user@inp1 ~/hw3/1 ] ./client 127.0.0.1 8888 tom
+Welcome to the dropbox-like server: tom
+<span class="hljs-meta">
+#</span><span class="bash"> In Terminal 0</span>
+[user@inp1 ~/hw3/0 ] 
+put testfile
+[Upload] testfile Start!
+Progress : [######################]
+[Upload] testfile Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> In Terminal 1</span>
+[user@inp1 ~/hw3/1 ] 
+[Download] testfile Start!
+Progress : [######################]
+[Download] testfile Finish!
+
+[user@inp1 ~/hw3 ] diff 0/testfile 1/testfile
+</code></pre><h4 id="Case-2-A-new-client-of-the-same-user-logs-in-15"><a class="anchor hidden-xs" href="#Case-2-A-new-client-of-the-same-user-logs-in-15" title="Case-2-A-new-client-of-the-same-user-logs-in-15"><span class="octicon octicon-link"></span></a><strong>[Case 2: A new client of the same user logs in] 15%</strong></h4><pre><code class="shell hljs"><span class="hljs-meta">#</span><span class="bash"> Terminal 2</span>
+[user@inp1 ~/hw3/2 ] ./client 127.0.0.1 8888 tom
+Welcome to the dropbox-like server: tom
+[Download] testfile Start!
+Progress : [######################]
+[Download] testfile Finish!
+
+[user@inp1 ~/hw3 ] diff 0/testfile 2/testfile
+</code></pre><h4 id="Case-3-Upload-files-from-different-clients-at-the-same-time-15"><a class="anchor hidden-xs" href="#Case-3-Upload-files-from-different-clients-at-the-same-time-15" title="Case-3-Upload-files-from-different-clients-at-the-same-time-15"><span class="octicon octicon-link"></span></a><strong>[Case 3: Upload files from different clients at the same time] 15%</strong></h4><pre><code class="shell hljs">[user@inp1 ~/hw3 ] cp testfile2 0/testfile2
+[user@inp1 ~/hw3 ] cp testfile3 1/testfile3
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 0</span>
+[user@inp1 ~/hw3/0 ] 
+put testfile2
+[Upload] testfile2 Start!
+Progress : [######################]
+[Upload] testfile2 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 1</span>
+[user@inp1 ~/hw3/1 ] 
+put testfile3
+[Upload] testfile3 Start!
+Progress : [######################]
+[Upload] testfile3 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 2</span>
+[user@inp1 ~/hw3/2 ] 
+[Download] testfile2 Start!
+Progress : [######################]
+[Download] testfile2 Finish!
+[Download] testfile3 Start!
+Progress : [######################]
+[Download] testfile3 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 0</span>
+[user@inp1 ~/hw3/0 ] 
+[Download] testfile3 Start!
+Progress : [######################]
+[Download] testfile3 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 1</span>
+[user@inp1 ~/hw3/1 ] 
+[Download] testfile2 Start!
+Progress : [######################]
+[Download] testfile2 Finish!
+
+[user@inp1 ~/hw3 ] diff 0/testfile2 1/testfile2
+[user@inp1 ~/hw3 ] diff 0/testfile2 2/testfile2
+[user@inp1 ~/hw3 ] diff 1/testfile3 2/testfile3
+[user@inp1 ~/hw3 ] diff 1/testfile3 0/testfile3
+</code></pre><h4 id="Case-4-Put-a-client-to-sleep-30"><a class="anchor hidden-xs" href="#Case-4-Put-a-client-to-sleep-30" title="Case-4-Put-a-client-to-sleep-30"><span class="octicon octicon-link"></span></a><strong>[Case 4: Put a client to sleep] 30%</strong></h4><pre><code class="shell hljs">[user@inp1 ~/hw3 ] cp testfile4 0/testfile4
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 3</span>
+[user@inp1 ~/hw3/3 ] ./client 127.0.0.1 8888 tom
+Welcome to the dropbox-like server: tom
+sleep 20
+The client starts to sleep.
+Sleep 1
+.
+.
+Sleep 19
+Sleep 20
+Client wakes up. 
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 0</span>
+[user@inp1 ~/hw3/0 ] 
+put testfile4
+[Upload] testfile4 Start!
+Progress : [######################]
+[Upload] testfile4 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 1</span>
+[user@inp1 ~/hw3/1 ] 
+[Download] testfile4 Start!
+Progress : [######################]
+[Download] testfile4 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 2</span>
+[user@inp1 ~/hw3/2 ] 
+[Download] testfile4 Start!
+Progress : [######################]
+[Download] testfile4 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 3</span>
+[user@inp1 ~/hw3/3 ] 
+[Download] testfile4 Start!
+Progress : [######################]
+[Download] testfile4 Finish!
+
+[user@inp1 ~/hw3 ] diff 0/testfile4 1/testfile4
+[user@inp1 ~/hw3 ] diff 0/testfile4 2/testfile4
+[user@inp1 ~/hw3 ] diff 0/testfile4 3/testfile4
+</code></pre><h4 id="Case-5-Separation-of-different-users-10"><a class="anchor hidden-xs" href="#Case-5-Separation-of-different-users-10" title="Case-5-Separation-of-different-users-10"><span class="octicon octicon-link"></span></a><strong>[Case 5: Separation of different users] 10%</strong></h4><pre><code class="shell hljs">[user@inp1 ~/hw3 ] cp testfile5 0/testfile5
+<span class="hljs-meta">#</span><span class="bash"> Terminal 4</span>
+[user@inp1 ~/hw3/4 ] ./client 127.0.0.1 8888 frank
+Welcome to the dropbox-like server: frank
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 0</span>
+[user@inp1 ~/hw3/0 ] 
+put testfile5
+[Upload] testfile5 Start!
+Progress : [######################]
+[Upload] testfile5 Finish!
+<span class="hljs-meta">#</span><span class="bash"> Terminal 1</span>
+[user@inp1 ~/hw3/1 ] 
+[Download] testfile5 Start!
+Progress : [######################]
+[Download] testfile5 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 2</span>
+[user@inp1 ~/hw3/2 ] 
+[Download] testfile5 Start!
+Progress : [######################]
+[Download] testfile5 Finish!
+<span class="hljs-meta">
+#</span><span class="bash"> Terminal 3</span>
+[user@inp1 ~/hw3/3 ] 
+[Download] testfile5 Start!
+Progress : [######################]
+[Download] testfile5 Finish!
+
+[user@inp1 ~/hw3 ] diff 0/testfile5 1/testfile5
+[user@inp1 ~/hw3 ] diff 0/testfile5 2/testfile5
+[user@inp1 ~/hw3 ] diff 0/testfile5 3/testfile5
+[user@inp1 ~/hw3 ] [ -e 4/testfile5 ]
+</code></pre><h4 id="Case-6-Exit-10"><a class="anchor hidden-xs" href="#Case-6-Exit-10" title="Case-6-Exit-10"><span class="octicon octicon-link"></span></a><strong>[Case 6: Exit] 10%</strong></h4><pre><code class="shell hljs"><span class="hljs-meta">#</span><span class="bash"> Terminal 0</span>
+[user@inp1 ~/hw3/0 ] exit
+<span class="hljs-meta">#</span><span class="bash"> Terminal 1</span>
+[user@inp1 ~/hw3/1 ] exit
+<span class="hljs-meta">#</span><span class="bash"> Terminal 2</span>
+[user@inp1 ~/hw3/2 ] exit
+<span class="hljs-meta">#</span><span class="bash"> Terminal 3</span>
+[user@inp1 ~/hw3/3 ] exit
+<span class="hljs-meta">#</span><span class="bash"> Terminal 4</span>
+[user@inp1 ~/hw3/4 ] exit
+</code></pre><h2 id="Homework-Submission-Requirements"><a class="anchor hidden-xs" href="#Homework-Submission-Requirements" title="Homework-Submission-Requirements"><span class="octicon octicon-link"></span></a>Homework Submission Requirements</h2><ul>
+<li>The due date of this homework is <strong>2020/1/2 THU 23:55</strong></li>
+<li>Please zip your source code and Makefile, and upload it to New E3 before the due time. (We don’t accept other compression format like rar, 7z, etc.)</li>
+<li>Make sure all your code can be compiled successfully on the workstations with your Makefile.</li>
+<li>Zip your files directly without a superfluous directory in the zip file.</li>
+<li>Name your zip file as <code>&lt;Student ID&gt;.zip</code>.</li>
+</ul><p>The directory structure in your zip file should be as follows (for instance, if you have only a <code>Makefile</code> and sender/receiver .c files):</p><pre><code>0755123.zip
+├── Makefile
+├── server.c/cpp
+└── client.c/cpp
+
+</code></pre><p>The following directory structure is <strong>wrong</strong>:</p><pre><code>0755123.zip
+└── 0755123
+    ├── Makefile
+    ├── server.c/cpp
+    ├── client.c/cpp
+    └── ……
+    
+</code></pre><h2 id="Grading-Policy"><a class="anchor hidden-xs" href="#Grading-Policy" title="Grading-Policy"><span class="octicon octicon-link"></span></a>Grading Policy</h2><p>We will score your code by six test cases using script.</p><pre><code>[user@inp1 ~ ] ./test &lt;path to the program's directory&gt; &lt;port&gt;  &lt;output mode&gt;
+</code></pre><ul>
+<li>Output modes
+<ul>
+<li>2 to print server/client messages</li>
+<li>1 to print client messages</li>
+<li>0 print nothing</li>
+</ul>
+</li>
+<li>If your program passes these six test cases, you will get 100 points.</li>
+<li>We will set tc to 10Mbits for checking your progress bar.</li>
+<li>Your progress bar will be used for checking whether your non-blocking server is correctly implemented in each case.</li>
+<li>If your progress bar in some cases has error, you will lose the points in that case.</li>
+<li>If your program did not output countdown and wake up message on the terminal of the client that executed the sleep command, you will not get the score of case 4.</li>
+<li>Furthermore, if the sleeping client get the test file uploaded by other client before he wakes up, you will not get the score of case 4.</li>
+<li>If your client can not sleep immediately after user types <code>sleep</code>, you lose 10 points. (a.k.a your client is in the blocking-mode)</li>
+<li>You can only use C or C++ in this homework.</li>
+</ul><div class="alert alert-danger">
+<p>After you successfully pass all the test cases on the terminal, you can run our script to check your grade.</p>
+<p><strong>Attention</strong>: For our demo!<br>
+You have to add 'pid &lt;process id&gt;’  before your client output any information.</p>
+<pre><code class="cpp hljs">Pid<span class="token operator">:</span> <span class="token number">18170</span> Sleep <span class="token number">1</span>
+Pid<span class="token operator">:</span> <span class="token number">18170</span> Sleep <span class="token number">2</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+Pid<span class="token operator">:</span> <span class="token number">18170</span> <span class="token punctuation">[</span>Upload<span class="token punctuation">]</span> testfile Start<span class="token operator">!</span>
+Pid<span class="token operator">:</span> <span class="token number">18170</span> Progress <span class="token punctuation">[</span>#####               <span class="token punctuation">]</span> 
+Pid<span class="token operator">:</span> <span class="token number">18170</span> <span class="token punctuation">[</span>Upload<span class="token punctuation">]</span>  testfile Finish<span class="token operator">!</span>
+
+Pid<span class="token operator">:</span> <span class="token number">18170</span> <span class="token punctuation">[</span>Download<span class="token punctuation">]</span> testfile Start<span class="token operator">!</span>
+Pid<span class="token operator">:</span> <span class="token number">18170</span> Progress <span class="token punctuation">[</span>#####               <span class="token punctuation">]</span> 
+Pid<span class="token operator">:</span> <span class="token number">18170</span> <span class="token punctuation">[</span>Download<span class="token punctuation">]</span>  testfile Finish<span class="token operator">!</span>
+</code></pre>
+<p><strong>Do not output pid: -100%</strong><br>
+<strong>Output your own debug message: -20%</strong><br>
+<strong>&lt;HINT&gt;</strong>: You can open a file and write your debug message in that file.</p>
+</div><h3 id="Penalty"><a class="anchor hidden-xs" href="#Penalty" title="Penalty"><span class="octicon octicon-link"></span></a>Penalty</h3><ul>
+<li>Submit your files directly instead of a zip file: -100%</li>
+<li>Use wrong format (e.g., rar, 7z) to compress your files: -100%</li>
+<li>Fail to execute your codes on the workstation: -100%</li>
+<li>Incorrect upload format (e.g., wrong directory structure, wrong file names): -10%</li>
+<li>Fail to compile all your codes with <code>make</code> command on the workstation: -20%</li>
+<li>Late submission: final score = original score <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo>&amp;#x00D7;</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 0.822em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.669em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.898em, 1000.62em, 2.718em, -999.997em); top: -2.559em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mo" id="MathJax-Span-3" style="font-family: STIXGeneral;">×</span></span><span style="display: inline-block; width: 0px; height: 2.564em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.816em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>×</mo></math></span></span><script type="math/tex" id="MathJax-Element-1">\times</script></span> <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mo stretchy=&quot;false&quot;>(</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mo stretchy=&quot;false&quot;>)</mo><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>n</mi></mrow></msup></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 2.205em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.796em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.539em, 1001.8em, 3.076em, -999.997em); top: -2.559em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mo" id="MathJax-Span-6" style="font-family: STIXGeneral;">(</span><span class="mfrac" id="MathJax-Span-7"><span style="display: inline-block; position: relative; width: 0.464em; height: 0px; margin-right: 0.105em; margin-left: 0.105em;"><span style="position: absolute; clip: rect(3.384em, 1000.31em, 4.152em, -999.997em); top: -4.403em; left: 50%; margin-left: -0.151em;"><span class="mn" id="MathJax-Span-8" style="font-size: 70.7%; font-family: STIXGeneral;">3</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; clip: rect(3.384em, 1000.36em, 4.152em, -999.997em); top: -3.635em; left: 50%; margin-left: -0.151em;"><span class="mn" id="MathJax-Span-9" style="font-size: 70.7%; font-family: STIXGeneral;">4</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; clip: rect(0.873em, 1000.46em, 1.232em, -999.997em); top: -1.278em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 0.464em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.078em;"></span></span></span></span><span class="msubsup" id="MathJax-Span-10"><span style="display: inline-block; position: relative; width: 0.771em; height: 0px;"><span style="position: absolute; clip: rect(3.179em, 1000.31em, 4.306em, -999.997em); top: -3.993em; left: 0em;"><span class="mo" id="MathJax-Span-11" style="font-family: STIXGeneral;">)</span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span><span style="position: absolute; top: -4.352em; left: 0.361em;"><span class="texatom" id="MathJax-Span-12"><span class="mrow" id="MathJax-Span-13"><span class="mi" id="MathJax-Span-14" style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;">𝑛</span></span></span><span style="display: inline-block; width: 0px; height: 3.998em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.564em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.497em; border-left: 0px solid; width: 0px; height: 1.691em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mo stretchy="false">)</mo><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></math></span></span><script type="math/tex" id="MathJax-Element-2">(\frac{3}{4})^{n}</script></span>, where <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>n</mi></mrow></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-15" style="width: 0.669em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.515em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.949em, 1000.46em, 2.718em, -999.997em); top: -2.559em; left: 0em;"><span class="mrow" id="MathJax-Span-16"><span class="texatom" id="MathJax-Span-17"><span class="mrow" id="MathJax-Span-18"><span class="mi" id="MathJax-Span-19" style="font-family: STIXGeneral; font-style: italic;">𝑛</span></span></span></span><span style="display: inline-block; width: 0px; height: 2.564em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.691em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></math></span></span><script type="math/tex" id="MathJax-Element-3">{n}</script></span> is the number of late days.</li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Homework-III-Non-Blocking-File-Transfer" title="Homework III Non-Blocking File Transfer">Homework III Non-Blocking File Transfer</a><ul class="nav">
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Inputs" title="Inputs">Inputs</a></li>
+<li class=""><a href="#Outputs" title="Outputs">Outputs</a></li>
+<li class=""><a href="#Test-Cases" title="Test Cases">Test Cases</a><ul class="nav">
+<li class=""><a href="#Steps" title="Steps">Steps</a></li>
+<li class=""><a href="#Output" title="Output">Output</a></li>
+</ul>
+</li>
+<li class=""><a href="#Homework-Submission-Requirements" title="Homework Submission Requirements">Homework Submission Requirements</a></li>
+<li class=""><a href="#Grading-Policy" title="Grading Policy">Grading Policy</a><ul class="nav">
+<li class=""><a href="#Penalty" title="Penalty">Penalty</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">全部展開</a><a class="back-to-top" href="#">回到頂部</a><a class="go-to-bottom" href="#">移至底部</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Homework-III-Non-Blocking-File-Transfer" title="Homework III Non-Blocking File Transfer">Homework III Non-Blocking File Transfer</a><ul class="nav">
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Inputs" title="Inputs">Inputs</a></li>
+<li class=""><a href="#Outputs" title="Outputs">Outputs</a></li>
+<li class=""><a href="#Test-Cases" title="Test Cases">Test Cases</a><ul class="nav">
+<li class=""><a href="#Steps" title="Steps">Steps</a></li>
+<li class=""><a href="#Output" title="Output">Output</a></li>
+</ul>
+</li>
+<li class=""><a href="#Homework-Submission-Requirements" title="Homework Submission Requirements">Homework Submission Requirements</a></li>
+<li class=""><a href="#Grading-Policy" title="Grading Policy">Grading Policy</a><ul class="nav">
+<li class=""><a href="#Penalty" title="Penalty">Penalty</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">全部展開</a><a class="back-to-top" href="#">回到頂部</a><a class="go-to-bottom" href="#">移至底部</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>

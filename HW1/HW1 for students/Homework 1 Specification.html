@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Homework 1 Specification - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @charset "UTF-8";@import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{display:block;background:#fff;padding:.5em;color:#333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}.markdown-body{font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{font-size:16px;padding:0 1em;color:#777;border-left:.25em solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0 none}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:760px;margin:25px auto -25px;padding:0 15px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:998}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child > ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ\ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:cover}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-published-note{color:#337ab7}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ\ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true" style="position: relative;"><h1 id="Homework-1-Specification"><a class="anchor hidden-xs" href="#Homework-1-Specification" title="Homework-1-Specification"><span class="octicon octicon-link"></span></a>Homework 1 Specification</h1><h6 id="tags-inp"><a class="anchor hidden-xs" href="#tags-inp" title="tags-inp"><span class="octicon octicon-link"></span></a>tags: <code>inp</code></h6><h2 id="Overview"><a class="anchor hidden-xs" href="#Overview" title="Overview"><span class="octicon octicon-link"></span></a>Overview</h2><p>In this homework, you are required to write two programs, a client and a server, to build a chat room system. The clients talk to one another through the server. The server accepts connections from the clients and processes the command from the clients.</p><div class="alert alert-info">
+<p><strong>Hint:</strong><br>
+It is suggested that you use <strong>select()</strong> for constructing the client and the server programs.</p>
+</div><h2 id="Specification"><a class="anchor hidden-xs" href="#Specification" title="Specification"><span class="octicon octicon-link"></span></a>Specification</h2><h3 id="Server"><a class="anchor hidden-xs" href="#Server" title="Server"><span class="octicon octicon-link"></span></a>Server</h3><ul>
+<li>The command to start the server<br>
+<code>./server &lt;SERVER PORT&gt;</code></li>
+</ul><p>If the number of arguments is not one, the server program should terminates.<br>
+The server can serve multiple clients simultaneously. Once a connection is established, the server will send a hello message to the client and give the client a username <code>anonymous</code>. The client can send different commands to the server. The messages transmitted between clients and the server are shown below.</p><h4 id="Hello-Message"><a class="anchor hidden-xs" href="#Hello-Message" title="Hello-Message"><span class="octicon octicon-link"></span></a>Hello Message</h4><p>When a client connects to the server, the server will send a hello message to the client and then broadcasts this user’s presence to other clients.</p><ul>
+<li>Client output format
+<ul>
+<li>To the newly connected client<br>
+<code>[Server] Hello, anonymous! From: &lt;Client IP&gt;:&lt;Client Port&gt;</code></li>
+<li>To existing clients<br>
+<code>[Server] Someone is coming!</code></li>
+</ul>
+</li>
+</ul><hr><h4 id="Offline-Message"><a class="anchor hidden-xs" href="#Offline-Message" title="Offline-Message"><span class="octicon octicon-link"></span></a>Offline Message</h4><p>When a client disconnect from the server, the server will send an offline message to all the other online clients to tell them someone has been offline.</p><ul>
+<li>Client output format<br>
+<code>[Server] &lt;USERNAME&gt; is offline.</code></li>
+</ul><hr><h4 id="Who-Message"><a class="anchor hidden-xs" href="#Who-Message" title="Who-Message"><span class="octicon octicon-link"></span></a>Who Message</h4><p>A client can type command below to list all online users.</p><ul>
+<li>Client input format<br>
+<code>who</code></li>
+</ul><p>The server will reply to sender a list of online users and tag the sender client. For N user, Server will send N lines. Each of them shows details of a user.</p><ul>
+<li>Client output format
+<ul>
+<li>If the user is not the client itself<br>
+<code>[Server] &lt;USERNAME&gt; &lt;CLIENT IP&gt;:&lt;CLIENT PORT&gt;</code></li>
+<li>If the user is the client itself<br>
+<code>[Server] &lt;SENDER USERNAME&gt; &lt;CLIENT IP&gt;:&lt;CLIENT PORT&gt; -&gt;me</code></li>
+</ul>
+</li>
+</ul><hr><h4 id="Change-Username-Message"><a class="anchor hidden-xs" href="#Change-Username-Message" title="Change-Username-Message"><span class="octicon octicon-link"></span></a>Change Username Message</h4><p>A client can type the command below to change his/her username.</p><ul>
+<li>Client input format<br>
+<code>name &lt;NEW USERNAME&gt;</code></li>
+</ul><p>The server has to verify if the new name is valid which means the input name is</p><ol>
+<li>not anonymous,</li>
+<li>unique, and</li>
+<li><strong>2~12</strong> English letters.</li>
+</ol><p>It will reject user’s request if this name cannot fit the rule.</p><ul>
+<li>Client output format
+<ul>
+<li>
+<p>If the new name is anonymous.<br>
+<code>[Server] ERROR: Username cannot be anonymous.</code></p>
+</li>
+<li>
+<p>If the new name is not unique.<br>
+<code>[Server] ERROR: &lt;NEW USERNAME&gt; has been used by others.</code></p>
+</li>
+<li>
+<p>If the new name does not consist of <strong>2~12</strong> English letters.<br>
+<code>[Server] ERROR: Username can only consists of 2~12 English letters.</code></p>
+</li>
+</ul>
+</li>
+</ul><p>The server will reply some messages to all users once a user changes his/her name.</p><ul>
+<li>Client output format
+<ul>
+<li>To user which changed his/her name<br>
+<code>[Server] You're now known as &lt;NEW USERNAME&gt;.</code></li>
+<li>To other users<br>
+<code>[Server] &lt;OLD USERNAME&gt; is now known as &lt;NEW USERNAME&gt;.</code></li>
+</ul>
+</li>
+</ul><div class="alert alert-info">
+<p><strong>Note:</strong><br>
+A user can be rename as itself, that is, when <strong>userA</strong> wants to rename as <strong>userA</strong>, server should not return error messages.</p>
+</div><hr><h4 id="Private-Message"><a class="anchor hidden-xs" href="#Private-Message" title="Private-Message"><span class="octicon octicon-link"></span></a>Private Message</h4><p>A client can send a private message to a specific client.</p><ul>
+<li>Client input format<br>
+<code>tell &lt;USERNAME&gt; &lt;MESSAGE&gt;</code></li>
+</ul><p>The server will send an error message back to the sender if either the sender’s name or the receiver’s name is anonymous.</p><ul>
+<li>Client output format
+<ul>
+<li>
+<p>If the sender’s name is anonymous<br>
+<code>[Server] ERROR: You are anonymous.</code></p>
+</li>
+<li>
+<p>If the receiver’s name is anonymous<br>
+<code>[Server] ERROR: The client to which you sent is anonymous.</code></p>
+</li>
+<li>
+<p>If the receiver doesn’t exist<br>
+<code>[Server] ERROR: The receiver doesn't exist.</code></p>
+</li>
+</ul>
+</li>
+</ul><p>Otherwise, the server sends the private message to the specific client and sends back a notification to the sender.</p><ul>
+<li>Client output format
+<ul>
+<li>
+<p>To the sender: If the message is sent<br>
+<code>[Server] SUCCESS: Your message has been sent.</code></p>
+</li>
+<li>
+<p>To the receiver: If both client’s name are not anonymous<br>
+<code>[Server] &lt;SENDER USERNAME&gt; tell you &lt;MESSAGE&gt;</code></p>
+</li>
+</ul>
+</li>
+</ul><hr><h4 id="Broadcast-Message"><a class="anchor hidden-xs" href="#Broadcast-Message" title="Broadcast-Message"><span class="octicon octicon-link"></span></a>Broadcast Message</h4><p>A client can send a broadcast message to all clients.</p><ul>
+<li>Client input format<br>
+<code>yell &lt;MESSAGE&gt;</code></li>
+</ul><p>While receiving the command from a user, the server will add <code>&lt;SENDER's USERNAME&gt;</code> at the head of it and broadcasts to all users including the sender.</p><ul>
+<li>Client output format<br>
+<code>[Server] &lt;SENDER's USERNAME&gt; yell &lt;MESSAGE&gt;</code></li>
+</ul><hr><h4 id="Error-Command"><a class="anchor hidden-xs" href="#Error-Command" title="Error-Command"><span class="octicon octicon-link"></span></a>Error Command</h4><p>Commands which haven’t been declared above are invalid commands. When a server receives an invalid command, it should send an error message back to the sending client.</p><ul>
+<li>Client output format<br>
+<code>[Server] ERROR: Error command.</code></li>
+</ul><hr><h3 id="Client"><a class="anchor hidden-xs" href="#Client" title="Client"><span class="octicon octicon-link"></span></a>Client</h3><p>A client cannot connect to more than one server at the same time.<br>
+Users should give the server IP and the port as the arguments of the client program.<br>
+If the number of arguments is not two, the client program should terminates.</p><ul>
+<li>The command to start the client<br>
+<code>./client &lt;SERVER IP&gt; &lt;SERVER PORT&gt;</code></li>
+</ul><hr><h4 id="Exit-Command"><a class="anchor hidden-xs" href="#Exit-Command" title="Exit-Command"><span class="octicon octicon-link"></span></a>Exit Command</h4><p>The user can type the command below to terminate the process at any time.</p><ul>
+<li>Command Format<br>
+<code>exit</code></li>
+</ul><div class="alert alert-info">
+<p><strong>Note:</strong><br>
+This command should be process by the client locally. That is, the client should close the connection and terminate the process while it receives the <strong>exit</strong> command.</p>
+</div><hr><h4 id="Receive-amp-Display-Format"><a class="anchor hidden-xs" href="#Receive-amp-Display-Format" title="Receive-amp-Display-Format"><span class="octicon octicon-link"></span></a>Receive &amp; Display Format</h4><p>The clients keep receiving commands from stdin and, except for “exit” command, send those to the server directly without any modification.</p><div class="alert alert-info">
+<p><strong>Note:</strong><br>
+For messages received from stdin, client can only process the exit command, others should be sent to the server without modification. All commands received from stdin (except exit command) should be sent to server directly.</p>
+</div><h2 id="Requirement"><a class="anchor hidden-xs" href="#Requirement" title="Requirement"><span class="octicon octicon-link"></span></a>Requirement</h2><ol>
+<li>All messages transmitted between the server and the clients should end with a newline (’\n’).</li>
+<li>The clients should send commands received from stdin to server directly without modification.</li>
+<li>The server/client should NOT crash or be hanged.</li>
+<li>Use a Makefile to compile your code. The file names of the client and the server should be <strong>client</strong> and <strong>server</strong> respectively.</li>
+<li>There will be no more than <strong>1024</strong> characters in a single line.</li>
+<li>There will be no more than <strong>10</strong> clients connecting to a server in one time.</li>
+<li>All the code should be successfully compiled and run on the workstations.</li>
+</ol><h2 id="Grading-Policy"><a class="anchor hidden-xs" href="#Grading-Policy" title="Grading-Policy"><span class="octicon octicon-link"></span></a>Grading Policy</h2><h3 id="Features"><a class="anchor hidden-xs" href="#Features" title="Features"><span class="octicon octicon-link"></span></a>Features</h3><ul>
+<li>hello: 10%</li>
+<li>exit / offline message: 10%</li>
+<li>who: 15%</li>
+<li>name: 15%</li>
+<li>tell: 20%</li>
+<li>yell: 20%</li>
+<li>Demo: 10%</li>
+</ul><div class="alert alert-info">
+<p><strong>Note:</strong><br>
+Each feature should be totally correct so that you can get full score for that feature. Take the <code>who</code> command for example, if you implement the function to change users’ name but don’t follow the output format, you will still loss the 15 points.</p>
+</div><h3 id="Penalty"><a class="anchor hidden-xs" href="#Penalty" title="Penalty"><span class="octicon octicon-link"></span></a>Penalty</h3><ul>
+<li>Incorrect upload format (wrong directory structures, wrong file names etc.): -10%</li>
+<li>Fail to <code>make</code> or <code>make test</code>: -10%</li>
+<li>Late submission: final score = original score * (3/4) ^ #_late_days</li>
+<li>Cannot compile or run on the workstations: -20%</li>
+</ul><h3 id="Testing-Flow"><a class="anchor hidden-xs" href="#Testing-Flow" title="Testing-Flow"><span class="octicon octicon-link"></span></a>Testing Flow</h3><ul>
+<li>A test program is provided by TA. You should make sure your program is able to pass all the test cases.</li>
+<li>The <code>test.c</code> file provided by TA should be included in your submission. You can modify it, but we will replace it with the original version while scoring.</li>
+<li>We will use the following command to test your program.</li>
+</ul><pre><code class="bash hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span></div><div class="code">make
+make <span class="hljs-built_in">test</span>
+</div></div></code></pre><ul>
+<li>Sample Makefile<br>
+You should make sure the <code>make</code> command will generate both client and server binaries, and the <code>make test</code> command will generate the test binary and run the tests.</li>
+</ul><pre><code class="bash hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span></div><div class="code"><span class="hljs-comment"># you can modify this section</span>
+all:
+    gcc -o client client.c
+    gcc -o server server.c
+
+<span class="hljs-comment"># test commands, you should not modify this section</span>
+<span class="hljs-built_in">test</span>: all
+    gcc -o <span class="hljs-built_in">test</span> test.c
+    stdbuf -o0 ./<span class="hljs-built_in">test</span>
+
+<span class="hljs-comment"># you can modify this section</span>
+clean:
+    rm -f server client <span class="hljs-built_in">test</span>
+</div></div></code></pre><h2 id="Submission"><a class="anchor hidden-xs" href="#Submission" title="Submission"><span class="octicon octicon-link"></span></a>Submission</h2><ul>
+<li>Due date: <strong>2019/11/7 Thu. 23:59</strong></li>
+<li>Hand-in format: <strong>&lt;Student ID&gt;.zip</strong></li>
+<li>You must zip your code, or we won’t accept your submission. Do not use <strong>rar</strong>, <strong>7z</strong> or others to compress your code.</li>
+<li>Please make sure the <code>Makefile</code> is in the top level of the zip file (not be put in any folder). The test code provided by TA should be included in your submission, too.</li>
+<li>It’s not necessary to upload your binaries as well since we will recompile your code from the sources.</li>
+<li>The <code>test.c</code> and <code>Makefile</code> are the only two files that must be in your submission. Feel free to add your own header files or set the file name yourselves. Remember to modify the <code>Makefile</code> to fit it into your program structure.</li>
+<li>Sample directory structure before <code>make</code>.</li>
+</ul><pre><code>/
+├── client.c
+├── server.c
+├── test.c        # test program provided by TA
+└── Makefile      # your makefile, please refer to the sample provided by TA
+</code></pre><ul>
+<li>Sample directory structure after <code>make &amp;&amp; make test</code></li>
+</ul><pre><code>/
+├── client.c
+├── server.c
+├── test.c        # test program provided by TA
+├── client        # client binary, must be generated by 'make' command
+├── server        # server binary, must be generated by 'make' command
+├── test          # test binary, must be generated by 'make test' command, must be in the same directory as server and client
+└── Makefile      # your makefile, please refer to the sample provided by TA
+</code></pre><h2 id="Demo"><a class="anchor hidden-xs" href="#Demo" title="Demo"><span class="octicon octicon-link"></span></a>Demo</h2><p>The demo will be announced later. You will be asked to explain your implementation and make some changes to your program.<br>
+<strong>Please remember to select your demo time after we announce!</strong><br>
+If your name doesn’t exist on our demo form, you won’t be allowed to demo your homework.</p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Homework-1-Specification" title="Homework 1 Specification">Homework 1 Specification</a><ul class="nav">
+<li class=""><a href="#Overview" title="Overview">Overview</a></li>
+<li class=""><a href="#Specification" title="Specification">Specification</a><ul class="nav">
+<li class=""><a href="#Server" title="Server">Server</a></li>
+<li><a href="#Client" title="Client">Client</a></li>
+</ul>
+</li>
+<li><a href="#Requirement" title="Requirement">Requirement</a></li>
+<li class=""><a href="#Grading-Policy" title="Grading Policy">Grading Policy</a><ul class="nav">
+<li class=""><a href="#Features" title="Features">Features</a></li>
+<li><a href="#Penalty" title="Penalty">Penalty</a></li>
+<li><a href="#Testing-Flow" title="Testing Flow">Testing Flow</a></li>
+</ul>
+</li>
+<li><a href="#Submission" title="Submission">Submission</a></li>
+<li><a href="#Demo" title="Demo">Demo</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">全部展開</a><a class="back-to-top" href="#">回到頂部</a><a class="go-to-bottom" href="#">移至底部</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Homework-1-Specification" title="Homework 1 Specification">Homework 1 Specification</a><ul class="nav">
+<li class=""><a href="#Overview" title="Overview">Overview</a></li>
+<li class=""><a href="#Specification" title="Specification">Specification</a><ul class="nav">
+<li class=""><a href="#Server" title="Server">Server</a></li>
+<li><a href="#Client" title="Client">Client</a></li>
+</ul>
+</li>
+<li><a href="#Requirement" title="Requirement">Requirement</a></li>
+<li class=""><a href="#Grading-Policy" title="Grading Policy">Grading Policy</a><ul class="nav">
+<li class=""><a href="#Features" title="Features">Features</a></li>
+<li><a href="#Penalty" title="Penalty">Penalty</a></li>
+<li><a href="#Testing-Flow" title="Testing Flow">Testing Flow</a></li>
+</ul>
+</li>
+<li><a href="#Submission" title="Submission">Submission</a></li>
+<li><a href="#Demo" title="Demo">Demo</a></li>
+</ul>
+</li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">全部展開</a><a class="back-to-top" href="#">回到頂部</a><a class="go-to-bottom" href="#">移至底部</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>

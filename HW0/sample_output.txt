@@ -1,0 +1,12 @@
+-------------------Input file example.txt-----------------
+reverse 11223344
+44332211
+split sdfbdsefff
+sdf dsefff 
+-------------------End of input file example.txt----------
+*******************User input*****************************
+reverse 123456667
+766654321
+split sssssbyryryr
+sssss yryryr 
+exit
